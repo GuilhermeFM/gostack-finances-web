@@ -1,7 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 interface ContainerProps {
   size?: 'small' | 'large';
+}
+
+interface LinkProps {
+  highlight: string;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -15,22 +20,32 @@ export const Container = styled.div<ContainerProps>`
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+`;
 
-    nav {
-      a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 16px;
-        transition: opacity 0.2s;
+export const NavLink = styled(Link)<LinkProps>`
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: opacity 0.2s;
+  padding-bottom: 10px;
 
-        & + a {
-          margin-left: 32px;
-        }
+  transition: opacity 0.2s;
 
-        &:hover {
-          opacity: 0.6;
-        }
-      }
-    }
+  ${(props) =>
+    props.highlight === 'true'
+      ? css`
+          border-bottom: 2px solid #ff872c;
+        `
+      : css`
+          border-bottom: 2px solid transparent;
+        `}
+
+  & + a {
+    margin-left: 32px;
+  }
+
+  &:hover {
+    opacity: 0.6;
   }
 `;
